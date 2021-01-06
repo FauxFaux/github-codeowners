@@ -2,8 +2,9 @@ import { execSync } from 'child_process';
 import { OwnedFile, OwnershipEngine } from '../lib/ownership';
 import { OUTPUT_FORMAT, writeOwnedFile, writeStats } from '../lib/writers';
 import { calcFileStats } from '../lib/stats';
+import { FromFileOptions } from '../lib/ownership';
 
-interface GitOptions {
+interface GitOptions extends FromFileOptions {
   dir: string;
   codeowners: string;
   shaA?: string;
@@ -24,7 +25,7 @@ export const git = async (options: GitOptions) => {
   const files: OwnedFile[] = [];
 
   for (const filePath of changedPaths) {
-    files.push(await OwnedFile.FromPath(filePath, engine, { countLines: false }));
+    files.push(await OwnedFile.FromPath(filePath, engine, options));
   }
 
   for (const file of files) {

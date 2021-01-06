@@ -1,8 +1,8 @@
 import { OUTPUT_FORMAT, writeOwnedFile, writeStats } from '../lib/writers';
 import { calcFileStats } from '../lib/stats';
-import { getFileOwnership } from '../lib/ownership';
+import { FromFileOptions, getFileOwnership } from '../lib/ownership';
 
-interface AuditOptions {
+interface AuditOptions extends FromFileOptions {
   codeowners: string;
   dir: string;
   unloved: boolean;

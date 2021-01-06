@@ -1,7 +1,8 @@
 import { OwnershipEngine, OwnedFile } from '../lib/ownership';
 import { writeOwnedFile, OUTPUT_FORMAT } from '../lib/writers';
+import { FromFileOptions } from '../lib/ownership';
 
-interface WhoOptions {
+interface WhoOptions extends FromFileOptions {
   file: string;
   dir: string;
   codeowners: string;

@@ -2,6 +2,10 @@ import { OwnershipEngine } from './OwnershipEngine';
 import * as fs from 'fs';
 import { log } from '../../logger';
 
+export interface FromFileOptions {
+  countLines: boolean;
+}
+
 export class OwnedFile {
   // tslint:disable-next-line:variable-name
   readonly path: string;
@@ -35,7 +39,7 @@ export class OwnedFile {
   }
 
   // tslint:disable-next-line:variable-name
-  public static FromPath = async (filePath: string, engine: OwnershipEngine, opts = { countLines: true }) => {
+  public static FromPath = async (filePath: string, engine: OwnershipEngine, opts: FromFileOptions = { countLines: true }) => {
     return new OwnedFile({
       path: filePath,
       lines: opts.countLines ? await countLinesInFile(filePath) : 0,
